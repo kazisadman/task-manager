@@ -4,20 +4,21 @@ import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, notification } from "antd";
 import { useState } from "react";
-
+import { useRouter } from "next/navigation";
 const Login = () => {
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const onFinish = (values) => {
-    setError('')
-
-    console.log("Received values of form: ", values);
+    setError("");
 
     if (values.username === "admin" && values.password === "123456") {
       notification.success({
         message: "Login Successful",
         description: "Welcome back!",
       });
+
+      router.push("/home");
     } else {
       setError("Incorrect username or password");
     }
@@ -26,7 +27,7 @@ const Login = () => {
     <div className="flex justify-center items-center w-full">
       <Form
         name="normal_login"
-        className="login-form bg-white p-5 rounded-lg mt-36"
+        className="login-form bg-black p-5 rounded-lg mt-36"
         initialValues={{
           remember: true,
         }}
